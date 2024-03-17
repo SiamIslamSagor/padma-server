@@ -38,6 +38,50 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/details/:id", async (req, res) => {
+      const id = req.params.id;
+      const allProducts = await productCollection.find().toArray();
+      let product = {};
+      allProducts.map(singleProduct =>
+        singleProduct.products.map(pdt => {
+          if (pdt["product-id"] === id) {
+            product = pdt;
+          }
+        })
+      );
+      res.send(product);
+    });
+
+    /*   app.get("/get-single-product-details/:id", async (req, res) => {
+      const productId = req.params.id;
+
+      try {
+        const allProducts = await productCollection.find().toArray();
+        const x = allProducts.map(singleProduct =>
+          //   console.log(singleProduct.products)
+          singleProduct.products.map(xx => {
+            // console.log(xx);
+            return xx;
+          })
+        );
+        console.log(x);
+
+
+        // const product = await productCollection.findOne({
+        //   _id: new ObjectId(productId),
+        // });
+
+        // if (!product) {
+        //   return res.status(404).json({ message: "Product not found" });
+        // }
+
+        // res.json(product);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error" });
+      }
+    }); */
+
     // ///// Task api ///////////
 
     /* app.post("/create-task", async (req, res) => {
@@ -55,7 +99,7 @@ async function run() {
 
     app.get("/task/:id", async (req, res) => {
       const id = req.params.id;
-      const query = { _id: new ObjectId(id) };
+      const query = { _id: new did) };
       const result = await taskCollection.findOne(query);
       res.send(result);
     });
