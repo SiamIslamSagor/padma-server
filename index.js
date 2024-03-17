@@ -33,6 +33,11 @@ async function run() {
       .db("PadmaEcommerceDB")
       .collection("allProducts");
 
+    app.get("/get-all-categories-product", async (req, res) => {
+      const result = await productCollection.find().toArray();
+      res.send(result);
+    });
+
     // ///// Task api ///////////
 
     /* app.post("/create-task", async (req, res) => {
