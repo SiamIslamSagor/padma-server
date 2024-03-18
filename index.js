@@ -5,9 +5,17 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 5000;
 
+//CORS CONFIG FILE
+const corsConfig = {
+  origin: ["http://localhost:5173", "https://padma-server.vercel.app"],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+};
+
 // middleware
 app.use(cors());
 app.use(express.json());
+app.use(cors(corsConfig));
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.e9we0w0.mongodb.net/?retryWrites=true&w=majority`;
 
