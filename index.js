@@ -38,7 +38,7 @@ async function run() {
       res.send(result);
     });
 
-    app.get("/details/:id", async (req, res) => {
+    app.get("/get-single-product-details/:id", async (req, res) => {
       const id = req.params.id;
       const allProducts = await productCollection.find().toArray();
       let product = {};
